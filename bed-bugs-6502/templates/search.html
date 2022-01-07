@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Projet de session">
+    <title>bed bugs 6502</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/scripts.css') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="ml-3 top-margin bottom-margin">
+        <h4>Recherche</h4>
+    </div>
+    <div class="ml-3 bottom-margin">
+        <form action="/" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="textsearch">Arrondissement ou quartier</label>
+                {% if error is not none %}
+                    <input type="text" class="form-control is-invalid" id="textsearch" name="textsearch" maxlength="100" value="{{ textsearch }}">
+                    <div class="invalid-feedback">
+                        <span>{{ error }}</span>
+                    </div>
+                {% else %}
+                    <input type="text" class="form-control" id="textsearch" name="textsearch" placeholder="Entrez le texte" maxlength="100">
+                {% endif %}
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-dark" type="submit">Recherche</button>
+            </div>
+        </form>
+    </div>
+    <div class="ml-3 bottom-margin">
+        <h4>Recherche rapide</h4>
+    </div>
+    <div class="ml-3">
+        <div  id="alertsuccess" class="alert alert-success hidden alert-width-search" role="alert">
+            La suppression des déclarations a été faite avec succès!
+        </div>
+        <div id="alertfail" class="alert alert-danger hidden alert-width-search" role="alert">
+            Erreur avec la suppression des déclarations.
+        </div>
+    </div>
+    <div class="ml-3 bottom-margin">
+        <form id="quicksearch" name="quicksearch" onsubmit="return false;">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="startdate">Date de début</label>
+                    <input type="text" class="form-control" id="startdate" name="startdate" placeholder="AAAA-MM-JJ" maxlength="10">
+                    <div class="invalid-feedback">
+                        <span id="startdateerror">Date invalide</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="enddate">Date de fin</label>
+                    <input type="text" class="form-control" id="enddate" name="enddate" placeholder="AAAA-MM-JJ" maxlength="10">
+                    <div class="invalid-feedback">
+                        <span>Date invalide</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="selectdetail">Quartier</label>
+                    <select class="form-control" id="selectdetail" name="selectdetail">
+                        <option value="0" selected>Choisissez un quartier</option>
+                    {% for n in neighborhoods %}
+                        <option value="{{ loop.index }}">{{ n }}</option>
+                    {% endfor %}
+                    </select>
+                    <div class="invalid-feedback">
+                        <span>Quartier invalide</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-dark" type="submit" onclick="doQuickSearch();">Recherche rapide</button>
+            </div>
+        </form>
+    </div>
+    <div class="ml-3 bottom-margin">
+        <span class="hidden" id="resultnum"></span>
+    </div>
+    <div id="divqsearch" class="col-md-9 hidden bottom-margin">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Arrondissement</th>
+                    <th scope="col">Quartier</th>
+                    <th scope="col">Nombre de déclarations</th>
+                    <th scope="col">Suppression</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyqsearch">
+            </tbody>
+        </table>
+    </div>
+    <div id="divqsearchdetail" class="col-md-10 hidden">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Date déclaration</th>
+                    <th scope="col">Date inspection</th>
+                    <th scope="col">Exterminations</th>
+                    <th scope="col">Début traitement</th>
+                    <th scope="col">Fin traitement</th>
+                    <th scope="col">Coord X</th>
+                    <th scope="col">Coord Y</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Latitude</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyqsearchdetail">
+            </tbody>
+        </table>
+    </div>
+{% include 'jsinclude.html' %}
+</body>
+</html>

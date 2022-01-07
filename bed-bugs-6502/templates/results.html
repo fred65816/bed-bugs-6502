@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Projet de session">
+    <title>bed bugs 6502</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/scripts.css') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="ml-3 top-margin bottom-margin">
+        <h4>Déclarations</h4>
+        <span>{{ num }} {{ 'résultat' if num < 2 else 'résultats' }}</span>
+    </div>
+{% if num != 0 %}
+    <div class="ml-3 mr-3">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Date déclaration</th>
+                    <th scope="col">Date inspection</th>
+                    <th scope="col">Exterminations</th>
+                    <th scope="col">Début traitement</th>
+                    <th scope="col">Fin traitement</th>
+                    <th scope="col">No. de quartier</th>
+                    <th scope="col">Quartier</th>
+                    <th scope="col">Arrondissement</th>
+                    <th scope="col">Coord X</th>
+                    <th scope="col">Coord Y</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Latitude</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for d in declarations %}
+                <tr>
+                    <th scope="row">{{ d[0] }}</th>
+                    <td>{{ d[1] }}</td>
+                    <td>{{ 'N/D' if d[2] is none else d[2] }}</td>
+                    <td>{{ 'N/D' if d[3] is none else d[3] }}</td>
+                    <td>{{ 'N/D' if d[4] is none else d[4] }}</td>
+                    <td>{{ 'N/D' if d[5] is none else d[5] }}</td>
+                    <td>{{ d[6] }}</td>
+                    <td>{{ d[7] }}</td>
+                    <td>{{ d[8] }}</td>
+                    <td>{{ 'N/D' if d[9] is none else d[9] }}</td>
+                    <td>{{ 'N/D' if d[10] is none else d[10] }}</td>
+                    <td>{{ 'N/D' if d[11] is none else d[11] }}</td>
+                    <td>{{ 'N/D' if d[12] is none else d[12] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+{% include 'jsinclude.html' %}
+</body>
+</html>

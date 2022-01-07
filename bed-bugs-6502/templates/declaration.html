@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Projet de session">
+    <title>bed bugs 6502</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/scripts.css') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="ml-3 top-margin bottom-margin">
+        <h4>Ajout de déclaration</h4>
+    </div>
+    <div class="ml-3"></div>
+        <div  id="alertsuccess" class="alert alert-success hidden alert-width" role="alert">
+            La déclaration a été soumise avec succès!
+        </div>
+        <div id="alertfail" class="alert alert-danger hidden alert-width" role="alert">
+            Problème avec la soumission de la déclaration.
+        </div>
+    </div>
+    <div class="ml-3 bottom-margin">
+        <form id="adddecl" name="adddecl" onsubmit="return false;">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="firstname">Prénom</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" maxlength="50">
+                    <div class="invalid-feedback">
+                        <span>Prénom invalide</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="lastname">Nom</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" maxlength="50">
+                    <div class="invalid-feedback">
+                        <span>Nom invalide</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="address">Adresse</label>
+                    <input type="text" class="form-control" id="address" name="address" maxlength="100">
+                    <div class="invalid-feedback">
+                        <span>Addresse invalide</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="visitdate">Date de visite</label>
+                    <input type="text" class="form-control" id="visitdate" name="visitdate" placeholder="AAAA-MM-JJ" maxlength="10">
+                    <div class="invalid-feedback">
+                        <span>Date invalide</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-7">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" name="description" maxlength="200">
+                    <div class="invalid-feedback">
+                        <span>Description invalide</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="selectneighborhood">Quartier</label>
+                    <select class="form-control" id="selectneighborhood" name="selectneighborhood" onchange="changeDistrict();">
+                        <option value="0" district="0" selected>Choisissez un quartier</option>
+                    {% for n in neighborhoods %}
+                        <option value="{{ loop.index }}" district="{{ n[0] }}">{{ n[1] }}</option>
+                    {% endfor %}
+                    </select>
+                    <div class="invalid-feedback">
+                        <span>Quartier invalide</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="selectdistrict">Arrondissement</label>
+                    <select class="form-control" id="selectdistrict" name="selectdistrict" disabled>
+                        <option value="0" selected>Arrondissement correspondant</option>
+                    {% for d in districts %}
+                        <option value="{{ d[0] }}">{{ d[1] }}</option>
+                    {% endfor %}
+                    </select>
+                    <div class="invalid-feedback">
+                        <span>Arrondissement invalide</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-dark" type="submit" onclick="addDeclaration();">Ajouter</button>
+            </div>
+        </form>
+    </div>
+{% include 'jsinclude.html' %}
+</body>
+</html>

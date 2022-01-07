@@ -1,0 +1,286 @@
+#%RAML 1.0
+title: bed bugs 6502 REST API
+mediaType: application/json
+types:
+  Declaration:
+    properties:
+      declaration_num:
+        type: integer
+        required: true
+      declaration_date:
+        type: string
+        required: true
+      inspection_date:
+        type: date-only | nil
+        required: true
+      extermination_num:
+        type: integer | nil
+        required: true
+      treatment_start_date:
+        type: date-only | nil
+        required: true
+      treatment_end_date:
+        type: date-only | nil
+        required: true
+      neighborhood_num:
+        type: string
+        required: true
+      neighborhood_name:
+        type: string
+        required: true
+      district_name:
+        type: string
+        required: true
+      x_coord:
+        type: number | nil
+        required: true
+      y_coord:
+        type: number | nil
+        required: true
+      longitude:
+        type: number | nil
+        required: true
+      latitude:
+        type: number | nil
+        required: true
+  NeighborhoodDeclarationTotal:
+    properties:
+      neighborhood_name:
+        type: string
+        required: true
+      declaration_total:
+        type: integer
+        required: true
+  NewProfile:
+    properties:
+      first_name:
+        type: string
+        required: true
+      last_name:
+        type: string
+        required: true
+      email:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+      neighborhoods:
+        type: string[]
+        required: true
+  ExistingProfile:
+    properties:
+      id:
+        type: integer
+        required: true
+      first_name:
+        type: string
+        required: true
+      last_name:
+        type: string
+        required: true
+      email:
+        type: string
+        required: true
+      neighborhoods:
+        type: string[]
+        required: true
+  NewDeclaration:
+    properties:
+      first_name:
+        type: string
+        required: true
+      last_name:
+        type: string
+        required: true
+      address:
+        type: string
+        required: true
+      inspection_date:
+        type: date-only
+        required: true
+      neighborhood:
+        type: string
+        required: true
+      district:
+        type: string
+        required: true
+      description:
+        type: string
+        required: false
+  ExistingNewDeclaration:
+    properties:
+      declaration_num:
+        type: integer
+        required: true
+      first_name:
+        type: string
+        required: true
+      last_name:
+        type: string
+        required: true
+      address:
+        type: string
+        required: true
+      inspection_date:
+        type: date-only
+        required: true
+      neighborhood:
+        type: string
+        required: true
+      district:
+        type: string
+        required: true
+      description:
+        type: string | nil
+/api:
+  /declaration:
+    post:
+      description: Create a new declaration.
+      body:
+        application/json:
+        type: NewDeclaration
+        example:
+          first_name: John
+          last_name: Carpenter
+          address: 12 Elm Street
+          inspection_date: 2021-04-22
+          neighborhood: Est
+          district: Montréal-Nord
+          description: bedbugs
+      responses:
+        201:
+          description: The declaration was succesfully created.
+          body:
+            application/json:
+              type: ExistingNewDeclaration
+              example:
+                id: 40885
+                first_name: John
+                last_name: Carpenter
+                address: 12 Elm Street
+                inspection_date: 2021-04-22
+                neighborhood: Est
+                district: Montréal-Nord
+                description: bedbugs
+        400:
+          description: Validation error with submitted declaration.
+        500:
+          description: Error with the database query.
+    /{declaration_num}:
+      delete:
+        description: Delete the data of a declaration, specified by its declaration number.
+        responses:
+          200:
+            description: The declaration was deleted successfully.
+          404:
+            description: The specified declaration number does not exist.
+          500:
+            description: Error with the database query.
+  /declarations:
+    get:
+      description: Return the declarations between two specified dates (inclusively).
+      queryParameters:
+        du:
+          description: Start date (ISO8601 format)
+          type: date-only
+          required: true
+          example: 2018-06-13
+        au:
+          description: End date (ISO8601 format)
+          type: date-only
+          required: true
+          example: 2018-07-21
+      responses:
+        200:
+          body:
+            application/json:
+              type: Declaration[]
+        400:
+          description: One or many queryParameters is missing or invalid.
+        500: 
+          description: Error with the database query.
+    /delete:
+      delete:
+        description: Delete the declarations between two specified dates (inclusively) for a specified neighborhood.
+        queryParameters:
+          du:
+            description: Start date (ISO8601 format)
+            type: date-only
+            required: true
+            example: 2018-06-13
+          au:
+            description: End date (ISO8601 format)
+            type: date-only
+            required: true
+            example: 2018-07-21
+          quartier:
+            description: neighborhood
+            type: string
+            required: true
+            example: Anjou
+        responses:
+          200:
+            description: All the declarations meeting those criterias were deleted.
+          400:
+            description: One or many queryParameters is missing or invalid.
+          500: 
+            description: Error with the database query.
+  /neighborhoods:
+    get:
+      description: Return the number of declaration per neighborhood for neighborhoods that have one or more declaration(s).
+      responses:
+        200:
+          body:
+            application/json:
+              type: NeighborhoodDeclarationTotal[]
+        500: 
+          description: Error with the database query.
+    /xml:
+      get:
+        description: Return the number of declaration per neighborhood for neighborhoods that have one or more declaration(s).
+        responses:
+          200:
+            body:
+              application/xml:
+                type: NeighborhoodDeclarationTotal[]
+          500: 
+            description: Error with the database query.
+    /csv:
+      get:
+        description: Return the number of declaration per neighborhood for neighborhoods that have one or more declaration(s).
+        responses:
+          200:
+            body:
+              application/csv:
+                type: NeighborhoodDeclarationTotal[]
+          500: 
+            description: Error with the database query.
+  /profile:
+    post:
+      description: Create a new profile.
+      body:
+        application/json:
+        type: NewProfile
+        example:
+          first_name: John
+          last_name: Carpenter
+          email: jc@gmail.com
+          password: Asour5489
+          neighborhoods: [Anjou, Villeray]
+      responses:
+        201:
+          description: The profile was succesfully created.
+          body:
+            application/json:
+              type: ExistingProfile
+              example:
+                id: 4
+                first_name: John
+                last_name: Carpenter
+                email: jc@gmail.com
+                neighborhoods: [Anjou, Villeray]
+        400:
+          description: Validation error with submitted profile.
+        500:
+          description: Error with the database query.
