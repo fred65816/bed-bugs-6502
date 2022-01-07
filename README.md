@@ -73,16 +73,16 @@ Le système offre un service REST permettant à un utilisateur de se créer un p
 
 Toutes les librairies et dépendances suivantes sont installées avec le fichier `requirements.txt`. Les autres dépendances et librairies présentes dans `requirements.txt` ont été automatiquement installées par celles dans la liste suivante:
 
-[Flask 1.1.2](https://pypi.org/project/Flask/)\\
-[requests 2.25.1](https://pypi.org/project/requests/)\\
-[APScheduler 3.7.0](https://pypi.org/project/APScheduler/)\\
-[flask-json-schema 0.0.5](https://pypi.org/project/flask-json-schema/)\\
-[dicttoxml 1.7.4](https://pypi.org/project/dicttoxml/)\\
-[pandas 1.2.4](https://pypi.org/project/pandas/)\\
-[PyYAML 5.4.1](https://pypi.org/project/PyYAML/)\\
-[python-dotenv 0.17.0](https://pypi.org/project/python-dotenv/)\\
-[tweetpy 3.10.0](https://pypi.org/project/tweepy/)\\
-[python-dateutil 2.8.1](https://pypi.org/project/python-dateutil/)\\
+- [Flask 1.1.2](https://pypi.org/project/Flask/)
+- [requests 2.25.1](https://pypi.org/project/requests/)
+- [APScheduler 3.7.0](https://pypi.org/project/APScheduler/)
+- [flask-json-schema 0.0.5](https://pypi.org/project/flask-json-schema/)
+- [dicttoxml 1.7.4](https://pypi.org/project/dicttoxml/)
+- [pandas 1.2.4](https://pypi.org/project/pandas/)
+- [PyYAML 5.4.1](https://pypi.org/project/PyYAML/)
+- [python-dotenv 0.17.0](https://pypi.org/project/python-dotenv/)
+- [tweetpy 3.10.0](https://pypi.org/project/tweepy/)
+- [python-dateutil 2.8.1](https://pypi.org/project/python-dateutil/)
 
 ## Documentation RAML
 
