@@ -2,7 +2,7 @@
 
 ## Présentation 
 
-bed bugs 6502 est mon projet de session dans le cadre du cours [INF5190](https://etudier.uqam.ca/cours?sigle=INF5190) - Programmation Web avancée du Baccalauréat en informatique et génie logiciel de l'UQAM. Le projet consiste à récupérer un ensemble de données provenant de la ville de Montréal sur les déclarations de punaise de lits et d'offrir des services à partir de ces données, soit un site web et un API REST. Il s'agit d'un backend Flask/Python et d'un frontend jinja2 avec Bootstrap.
+bed bugs 6502 est mon projet de session dans le cadre du cours [INF5190 - Programmation Web avancée](https://etudier.uqam.ca/cours?sigle=INF5190) du Baccalauréat en informatique et génie logiciel de l'UQAM. Le projet consiste à récupérer un ensemble de données provenant de la ville de Montréal sur les déclarations de punaise de lits et d'offrir des services à partir de ces données, soit un site web et un API REST. Il s'agit d'un backend Flask/Python et d'un frontend jinja2 avec Bootstrap.
 
 Il y avait 20 fonctionnalités possibles à développer, chacun valant des points et faire le travail seul nécessitait d'en faire plusieurs mais pas toutes. J'ai donc choisi de compléter les fonctionnalités A1 à A6, B1, B2, C1 à C3, D1 à D3 et E1. Pour une description détaillée de chacune, vous pouvez consulter le [PDF de l'énoncé](enonce.pdf). De plus, il y a un ficher [correction.md](correction.md) détaillant comment tester chacune d'elles. Ci-bas sera seulement faite une description sommaire de ce qui a été implémenté.
 
@@ -73,16 +73,16 @@ Le système offre un service REST permettant à un utilisateur de se créer un p
 
 Toutes les librairies et dépendances suivantes sont installées avec le fichier `requirements.txt`. Les autres dépendances et librairies présentes dans `requirements.txt` ont été automatiquement installées par celles dans la liste suivante:
 
-[Flask 1.1.2](https://pypi.org/project/Flask/)
-[requests 2.25.1](https://pypi.org/project/requests/)
-[APScheduler 3.7.0](https://pypi.org/project/APScheduler/)
-[flask-json-schema 0.0.5](https://pypi.org/project/flask-json-schema/)
-[dicttoxml 1.7.4](https://pypi.org/project/dicttoxml/)
-[pandas 1.2.4](https://pypi.org/project/pandas/)
-[PyYAML 5.4.1](https://pypi.org/project/PyYAML/)
-[python-dotenv 0.17.0](https://pypi.org/project/python-dotenv/)
-[tweetpy 3.10.0](https://pypi.org/project/tweepy/)
-[python-dateutil 2.8.1](https://pypi.org/project/python-dateutil/)
+[Flask 1.1.2](https://pypi.org/project/Flask/)\\
+[requests 2.25.1](https://pypi.org/project/requests/)\\
+[APScheduler 3.7.0](https://pypi.org/project/APScheduler/)\\
+[flask-json-schema 0.0.5](https://pypi.org/project/flask-json-schema/)\\
+[dicttoxml 1.7.4](https://pypi.org/project/dicttoxml/)\\
+[pandas 1.2.4](https://pypi.org/project/pandas/)\\
+[PyYAML 5.4.1](https://pypi.org/project/PyYAML/)\\
+[python-dotenv 0.17.0](https://pypi.org/project/python-dotenv/)\\
+[tweetpy 3.10.0](https://pypi.org/project/tweepy/)\\
+[python-dateutil 2.8.1](https://pypi.org/project/python-dateutil/)\\
 
 ## Documentation RAML
 
